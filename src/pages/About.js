@@ -1,9 +1,13 @@
 import React from "react";
+import "./About.css";
 
 const About = () => {
   return (
-    <div> 
-      <h2>About Page</h2>
+    <div className="about">
+      <h2>
+        Contact Management System Application using React with Routing using
+        Firebase.
+      </h2>
     </div>
   );
 };

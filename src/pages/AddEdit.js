@@ -15,19 +15,57 @@ const AddEdit = () => {
   const { name, email, contact } = state;
   const navigate = useNavigate();
 
+  const { id } = useParams();
+
+  useEffect(() => {
+    appDb.child("contacts").on("value", (snapshot) => {
+      if (snapshot.val() !== null) {
+        setData({ ...snapshot.val() });
+      } else {
+        setData({});
+      }
+    });
+    return () => {
+      setData({});
+    };
+  }, [id]);
+
+  useEffect(() => {
+    if (id) {
+      setState({ ...data[id] });
+    } else {
+      setState({ ...initialState });
+    }
+
+    return () => {
+      setState({ ...initialState });
+    };
+  }, [id, data]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!name || !email || !contact) {
       toast.error("Please provide value in each input feild");
     } else {
-      appDb.child("contacts").push(state, (err) => {
-        if (err) {
-          toast.error(err);
-        } else {
-          toast.success("Contact Added Successfully" );
-        }
-      });
-      setTimeout(() => navigate("/"), 800);
+      if (!id) {
+        appDb.child("contacts").push(state, (err) => {
+          if (err) {
+            toast.error(err);
+          } else {
+            toast.success("Contact Added Successfully");
+          }
+        });
+      } else {
+        appDb.child(`contacts/${id}`).set(state, (err) => {
+          if (err) {
+            toast.error(err);
+          } else {
+            toast.success("Contact Updated Successfully");
+          }
+        });
+      }
+
+      setTimeout(() => navigate("/"));
     }
   };
   const handleInputChange = (e) => {
@@ -43,7 +81,7 @@ const AddEdit = () => {
           id="name"
           name="name"
           placeholder="Enter Name"
-          value={name}
+          value={name || ""}
           onChange={handleInputChange}
         />
 
@@ -53,7 +91,7 @@ const AddEdit = () => {
           id="email"
           name="email"
           placeholder="Enter Email Address"
-          value={email}
+          value={email || ""}
           onChange={handleInputChange}
         />
 
@@ -63,11 +101,11 @@ const AddEdit = () => {
           id="contact"
           name="contact"
           placeholder="Enter Contact No."
-          value={contact}
+          value={contact || ""}
           onChange={handleInputChange}
         />
 
-        <input type="submit" value="Save" />
+        <input type="submit" value={id ? "Update" : "Save"} />
       </form>
     </div>
   );

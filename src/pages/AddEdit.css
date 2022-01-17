@@ -7,6 +7,13 @@
   margin-top: 100px;
 }
 
+.formArea label {
+  font-size: 18px;
+  /* float: left; */
+  text-align: center;
+  font-weight: 600;
+}
+
 .formData {
   margin: auto;
   padding: 15px;
@@ -20,7 +27,7 @@ input[type="number"],
 select {
   width: 100%;
   padding: 12px 20px;
-  margin: 8px 0;
+  margin: 8px 0px 30px 0px;
   display: inline-block;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -28,7 +35,7 @@ select {
 }
 
 input[type="submit"] {
-  width: 100%;
+  width: 95%;
   background-color: #4caf50;
   color: white;
   padding: 14px 20px;
@@ -36,8 +43,13 @@ input[type="submit"] {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  font-weight: 200;
+  font-size: 15px;
+  letter-spacing: 2px;
 }
 
 input[type="submit"]:hover {
   background-color: #45a049;
+  width: 100%;
+  transition: 200ms;
 }
