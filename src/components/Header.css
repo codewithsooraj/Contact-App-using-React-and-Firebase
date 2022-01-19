@@ -41,6 +41,17 @@
   float: right;
 }
 
+.searchForm {
+  display: inline;
+}
+.searchForm input {
+  margin: auto;
+  width: 40% !important;
+  height: 35px;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
 @media screen and (max-width: 500px) {
   .header p {
     float: none;
