@@ -6,7 +6,7 @@ const Header = () => {
   const [activeTab, setActiveTab] = useState("Home");
   const location = useLocation();
   const navigate = useNavigate();
-  const [search, setSearch] = useState();
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     if (location.pathname === "/") {
@@ -21,7 +21,7 @@ const Header = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     navigate(`/search?name=${search}`);
-    setSearch("");
+    setSearch('');
   };
 
   return (
